@@ -1,11 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage('Run Deploy Script') {
+        stage('Build Docker Images') {
             steps {
-                sh './deploy.sh'
+                sh 'docker build -t todo-backend:dev ./backend'
+                sh 'docker build -t todo-frontend:dev ./frontend'
+            }
+        }
+
+        stage('Apply Kubernetes Resources') {
+            steps {
+                sh 'kubectl apply -f kubernetes/'
             }
         }
     }
 }
+
 
