@@ -7,12 +7,6 @@ pipeline {
                 sh 'docker build -t todo-frontend:dev ./frontend'
             }
         }
-
-        stage('Apply Kubernetes Resources') {
-            steps {
-                sh 'kubectl apply -f kubernetes/'
-            }
-        }
     }
 }
 
